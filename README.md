@@ -1,93 +1,102 @@
-Project Overview: Grade Equivalency Lookup System
-Build a Flask + React web app to look up US grade point equivalents for universities across countries (Ghana, China, etc.) based on Excel data.
+# 📊 Grade Equivalency Lookup System
 
-🧱 1. Project Structure
-bash
-Copy
-Edit
-clgproj/
-├── app.py                      # Flask backend entry point
-├── ghana.py                   # Grade logic for Ghana
-├── china.py                   # Grade logic for China
-├── University List.xlsx       # Excel file with grading data
-└── grade-lookup/              # React frontend project
-⚙️ 2. Backend Setup (Python + Flask)
-🔹 Required Python Packages
-Install via pip:
+A full-stack web application to fetch **US grade point equivalents** for universities in **Ghana**, **China**, and **Nigeria** using Excel-based grading formats.
 
-bash
-Copy
-Edit
+---
+
+## 🗂️ Project Structure
+```
+clgproj/                   # Project Root
+├── app.py                # Flask backend entry point
+├── ghana.py              # Ghana grade logic
+├── china.py              # China grade logic
+├── nigeria.py            # Nigeria grade logic
+├── University List.xlsx  # Excel data file (excluded from Git)
+└── grade-lookup/         # React frontend app
+```
+
+---
+
+## ⚙️ Backend Setup (Flask)
+
+### 1. Install Dependencies
+```bash
 pip install flask flask-cors pandas openpyxl
-📦 Packages Used:
-Package	Purpose
-flask	Web server framework
-flask-cors	Enable frontend-backend communication (CORS)
-pandas	Load and manipulate Excel files
-openpyxl	Excel file engine for .xlsx support
-🔹 Running the Backend
-bash
-Copy
-Edit
+```
+
+### 2. Run Flask Server
+```bash
 python app.py
-Flask runs on http://localhost:5000
-API Endpoints:
-GET /get_grade_point → Ghana
-GET /get_China_grade_point → China
-💻 3. Frontend Setup (React)
-🔹 Initialize React App
-Navigate to your folder and run:
+```
+> Flask runs at: `http://localhost:5000`
 
-bash
-Copy
-Edit
-npx create-react-app grade-lookup
+### API Endpoints:
+| Endpoint                                | Country  |
+|----------------------------------------|----------|
+| `/get_grade_point`                     | Ghana    |
+| `/get_China_grade_point`               | China    |
+| `/get_Nigeria_grade_point`             | Nigeria  |
+
+---
+
+## 💻 Frontend Setup (React)
+
+### 1. Initialize React App
+```bash
 cd grade-lookup
-🔹 Run the React App
-bash
-Copy
-Edit
+npm install
+```
+
+### 2. Run React Server
+```bash
 npm start
-React runs on http://localhost:3000
-🔧 4. Frontend: API Integration and Encoding Fix
-✨ Packages Used:
-Package	Purpose
-react	UI library
-fetch API	Send GET requests to Flask API
-No additional packages were installed — pure React + Fetch was used.
+```
+> React runs at: `http://localhost:3000`
 
-🔹 Encoding Fix for A+ Grade
-Used encodeURIComponent(grade) in React to convert A+ to A%2B.
-Flask backend modified to interpret both A+ and A%2B.
-🗂️ 5. Excel File Structure (University List.xlsx)
-Sheet: Ghana University List
-University List	Format
-Academic City University College	Format 22 / Format 23
-Sheet: Ghana Formats
-Format	A+	A	B+	B	...
-Format / US Grade Points	4.0	3.75	...	...	
-Format 22	A+	A	B+	B	...
-Format 23	100	90	80	75	...
-🔐 6. CORS Configuration (Backend)
-python
-Copy
-Edit
-from flask_cors import CORS
+### Features:
+- Buttons to select **country**
+- Input fields for **University** and **Grade**
+- Result display with **US GPA equivalents**
 
-app = Flask(__name__)
-CORS(app)  # Enable CORS for all routes
-🧩 7. Key Fixes Implemented
-Fix	Description
-Grade encoding (A+)	Encoded A+ as A%2B in frontend, decoded in backend
-Excel reading without headers	Handled with header=None for format sheet
-Grade normalization	Removed spaces, normalized ＋ to +, and compared case-insensitive
-Multiple API endpoints	Supported different countries via modular routes
-Dynamic frontend switching	Frontend buttons to switch between countries and APIs
-📦 Summary of Installed Tools
-Tool/Package	Installed With
-Python 3.x	Your local environment
-Flask	pip install flask
-Flask-CORS	pip install flask-cors
-pandas	pip install pandas
-openpyxl	pip install openpyxl
-React App	npx create-react-app
+---
+
+## 📦 Packages Used
+
+### Backend:
+| Package      | Purpose                          |
+|--------------|----------------------------------|
+| `flask`      | Web server framework             |
+| `flask-cors` | Enable frontend-backend requests |
+| `pandas`     | Excel file reading               |
+| `openpyxl`   | `.xlsx` file engine              |
+
+### Frontend:
+| Tool         | Purpose                          |
+|--------------|----------------------------------|
+| `react`      | UI framework                     |
+| `fetch API`  | API requests                     |
+
+---
+
+## 🧾 Notes
+- **Excel File** (`University List.xlsx`) is **excluded from Git**.
+- Excel sheets must include:
+  - `Ghana University List`, `Ghana Formats`
+  - `China University List`, `China Formats`
+  - `Nigeria University List`, `Nigeria Formats`
+- Special grades like `A+` should be URL-encoded as `A%2B`.
+
+---
+
+## 🚀 Future Enhancements
+- Support for **India**
+- **File upload** feature for custom Excel files
+- Deployment via **Render/Netlify**
+
+---
+
+## 👩‍💻 Author
+Developed by **Amisha Sinha**
+
+Let me know if you need help deploying, debugging, or expanding this project! 🚀
+
