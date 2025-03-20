@@ -1,0 +1,9 @@
+# Ignore Excel data file
+University List.xlsx
+
+# Ignore Excel temp/lock files (Windows creates these)
+~$*
+
+# Optional: ignore all .xlsx files
+*.xlsx
+
